@@ -3,7 +3,7 @@ import * as React from 'react';
 interface ICardProps {
   name: string;
   email: string;
-  id: string;
+  id: number;
 }
 
 const Card = (props: ICardProps) => {
