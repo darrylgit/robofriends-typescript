@@ -18,7 +18,7 @@ interface IAppState {
 }
 
 class App extends React.Component<IAppProps, IAppState> {
-  constructor(props) {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
       robots: [],
@@ -34,11 +34,11 @@ class App extends React.Component<IAppProps, IAppState> {
       });
   }
 
-  onSearchChange = (event: React.FormEvent<HTMLInputElement>): void => {
+  onSearchChange = (event: React.SyntheticEvent<HTMLInputElement>): void => {
     this.setState({ searchfield: event.currentTarget.value });
   };
 
-  render() {
+  render(): JSX.Element {
     const { robots, searchfield } = this.state;
     const filteredRobots = robots.filter((robot: IRobot): boolean => {
       return robot.name.toLowerCase().includes(searchfield.toLowerCase());

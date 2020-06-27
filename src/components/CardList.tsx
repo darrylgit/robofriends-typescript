@@ -2,12 +2,7 @@ import * as React from 'react';
 import Card from './Card';
 import { IRobot } from '../containers/App';
 
-interface ICardListProps {
-  robots: Array<IRobot>;
-}
-
-const CardList = (props: ICardListProps) => {
-  const { robots } = props;
+const CardList = ({ robots }: { robots: Array<IRobot> }) => {
   return (
     <div>
       {robots.map((user, i) => {

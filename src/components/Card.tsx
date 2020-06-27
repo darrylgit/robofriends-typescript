@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-interface ICardProps {
+interface CardStatelessProps {
   name: string;
   email: string;
   id: number;
 }
 
-const Card = (props: ICardProps) => {
-  const { name, email, id } = props;
+const Card: React.SFC<CardStatelessProps> = ({ name, email, id }) => {
   return (
     <div className='tc grow bg-light-green br3 pa3 ma2 dib bw2 shadow-5'>
       <img alt='robots' src={`https://robohash.org/${id}?200x200`} />
