@@ -10,8 +10,7 @@ export interface IRobot {
   email: string;
 }
 
-interface IAppProps {
-}
+interface IAppProps {}
 
 interface IAppState {
   robots: Array<IRobot>;
@@ -20,39 +19,41 @@ interface IAppState {
 
 class App extends React.Component<IAppProps, IAppState> {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       robots: [],
       searchfield: ''
-    }
+    };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response=> response.json())
-      .then(users => {this.setState({ robots: users})});
+      .then(response => response.json())
+      .then(users => {
+        this.setState({ robots: users });
+      });
   }
 
-  onSearchChange = (event) => {
-    this.setState({ searchfield: event.currentTarget.value })
-  }
+  onSearchChange = (event: React.FormEvent<HTMLInputElement>): void => {
+    this.setState({ searchfield: event.currentTarget.value });
+  };
 
   render() {
     const { robots, searchfield } = this.state;
-    const filteredRobots = robots.filter(robot =>{
+    const filteredRobots = robots.filter((robot: IRobot): boolean => {
       return robot.name.toLowerCase().includes(searchfield.toLowerCase());
-    })
-    return !robots.length ?
-      <h1>Loading</h1> :
-      (
-        <div className='tc'>
-          <h1 className='f1'>RoboFriends</h1>
-          <SearchBox searchChange={this.onSearchChange}/>
-          <Scroll>
-            <CardList robots={filteredRobots} />
-          </Scroll>
-        </div>
-      );
+    });
+    return !robots.length ? (
+      <h1>Loading</h1>
+    ) : (
+      <div className='tc'>
+        <h1 className='f1'>RoboFriends</h1>
+        <SearchBox searchChange={this.onSearchChange} />
+        <Scroll>
+          <CardList robots={filteredRobots} />
+        </Scroll>
+      </div>
+    );
   }
 }
 
